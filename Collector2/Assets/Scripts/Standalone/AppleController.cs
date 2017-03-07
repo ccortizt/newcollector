@@ -1,31 +1,123 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AppleController : MonoBehaviour {
+public class AppleController : MonoBehaviour
+{
 
 
     private int normalNumberMovements = 3;
-    
-    private float maxForceProportion = 15f;    
 
-	void Start () {
+    private float maxForceProportion;
+    private float minForceProportion;
 
+    private int scoreToGive;
+
+    void Start()
+    {
+        AssignScore();
+        AssignForce();
         AppleMovement();
         StartCoroutine(RandomAppleMovementCycle(GetRandom(1, 5), normalNumberMovements));
 
-	}
+    }
+
+    private void AssignForce()
+    {
+        if (gameObject.name.Contains("Red"))
+        {
+            minForceProportion = 10f;
+            maxForceProportion = 12.5f;
+        }
+
+        if (gameObject.name.Contains("Green"))
+        {
+            minForceProportion = 12.5f;
+            maxForceProportion = 15f;
+        }
+
+        if (gameObject.name.Contains("Blue"))
+        {
+            minForceProportion = 0f;
+            maxForceProportion = 5f;
+        }
+
+        if (gameObject.name.Contains("Yellow"))
+        {
+            minForceProportion = 0f;
+            maxForceProportion = 5f;
+        }
+
+        if (gameObject.name.Contains("Purple"))
+        {
+            minForceProportion = 5f;
+            maxForceProportion = 10f;
+        }
+
+        if (gameObject.name.Contains("Random"))
+        {
+            minForceProportion = 15f;
+            maxForceProportion = 20f;
+        }
+    }
+
+    private void AssignScore()
+    {
+        if (gameObject.name.Contains("Red"))
+        {
+            scoreToGive = 1;
+        }
+
+        if (gameObject.name.Contains("Green"))
+        {
+            scoreToGive = 3;
+        }
+
+        if (gameObject.name.Contains("Blue"))
+        {
+            scoreToGive = 2;
+        }
+
+        if (gameObject.name.Contains("Yellow"))
+        {
+            scoreToGive = 2;
+        }
+
+        if (gameObject.name.Contains("Purple"))
+        {
+            scoreToGive = 2;
+        }
+
+        if (gameObject.name.Contains("Random"))
+        {
+            scoreToGive = 5;
+        }
+    }
 
     private void AppleMovement()
     {
-        if (Random.Range(0, 2) == 0){
-            gameObject.GetComponent<Rigidbody>().velocity = transform.forward * GetRandom(-maxForceProportion, maxForceProportion); 
+
+        int rand = Random.Range(0, 4);
+
+        if (rand == 0)
+        {
+            gameObject.GetComponent<Rigidbody>().velocity = transform.forward * GetRandom(minForceProportion, maxForceProportion);
+        }
+
+        else if (rand == 1)
+        {
+            gameObject.GetComponent<Rigidbody>().velocity = transform.forward * -GetRandom(minForceProportion, maxForceProportion);
+        }
+
+        else if (rand == 2)
+        {
+            gameObject.GetComponent<Rigidbody>().velocity = transform.right * -GetRandom(minForceProportion, maxForceProportion);
         }
 
         else
         {
-            gameObject.GetComponent<Rigidbody>().velocity = transform.right * GetRandom(-maxForceProportion, maxForceProportion);
+            gameObject.GetComponent<Rigidbody>().velocity = transform.right * GetRandom(minForceProportion, maxForceProportion);
         }
-            
+
     }
 
     private float GetRandom(float min, float max)
@@ -52,5 +144,11 @@ public class AppleController : MonoBehaviour {
     //        Destroy(gameObject);
     //    }
     //}
+
+    public int GetScoreToAdd()
+    {
+        return scoreToGive;
+    }
 }
+
 

@@ -8,7 +8,10 @@ public class PointsManager : MonoBehaviour {
     private int score;
     GameObject exp;
 
+    private bool canAddScore;
+
 	void Start () {
+        canAddScore = true;
         score = 0;
 	}
 	
@@ -16,22 +19,26 @@ public class PointsManager : MonoBehaviour {
     {
         if (coll.gameObject.name.Contains("Apple"))
         {
-            scorePlusOne();
-            
-            if(gameObject.name.Contains("Player"))
-                exp = (GameObject)Instantiate(Resources.Load("Prefabs/ExplosionPlayer"), transform.position, Quaternion.identity);
-            else
-                exp = (GameObject)Instantiate(Resources.Load("Prefabs/ExplosionEnemy"), transform.position, Quaternion.identity);
-            Destroy(exp, 1);
-            Destroy(coll.gameObject);
+
+            if (canAddScore)
+            {
+                scorePlus(coll.gameObject.GetComponent<AppleController>().GetScoreToAdd());
+
+                if (gameObject.name.Contains("Player"))
+                    exp = (GameObject)Instantiate(Resources.Load("Prefabs/ExplosionPlayer"), transform.position, Quaternion.identity);
+                else
+                    exp = (GameObject)Instantiate(Resources.Load("Prefabs/ExplosionEnemy"), transform.position, Quaternion.identity);
+                Destroy(exp, 1);
+                Destroy(coll.gameObject);
+            }            
             
         }
 
     }
 
-    public void scorePlusOne()
+    public void scorePlus(int scoreToAdd)
     {
-        score++;
+        score += scoreToAdd;
         gameObject.transform.FindChild("Canvas").transform.FindChild("Text").GetComponent<Text>().text = "" + score;
 
     }
@@ -39,5 +46,10 @@ public class PointsManager : MonoBehaviour {
     public int GetScore()
     {
         return score;
+    }
+
+    public void CantAddPoints()
+    {
+        canAddScore = false;
     }
 }

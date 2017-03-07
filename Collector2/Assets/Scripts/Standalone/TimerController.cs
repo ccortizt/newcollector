@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
-public class TimerController : MonoBehaviour {
+public class TimerController : MonoBehaviour
+{
 
     public float timeLeft;
     private bool timerOn;
 
     private GameObject endGameHUD;
-	void Start () {
+    void Start()
+    {
         Debug.Log("STARTING GAME");
         timeLeft = 60f;
         timerOn = true;
-	}
+    }
 
     void Update()
     {
@@ -32,7 +34,9 @@ public class TimerController : MonoBehaviour {
                 timerOff();
                 GameObject.Find("Enemy").GetComponent<IAPlayerController>().enabled = false;
                 GameObject.Find("Enemy").GetComponent<NavMeshAgent>().enabled = false;
+                GameObject.Find("Enemy").GetComponent<PointsManager>().CantAddPoints();
                 GameObject.Find("Player").GetComponent<PlayerController>().enabled = false;
+                GameObject.Find("Player").GetComponent<PointsManager>().CantAddPoints();
                 StartCoroutine(enableEnd());
             }
         }
@@ -46,10 +50,10 @@ public class TimerController : MonoBehaviour {
 
         endGameHUD = (GameObject)Instantiate(Resources.Load("Prefabs/EndGameHUD"), Vector3.zero, Quaternion.identity);
         endGameHUD.name = "EndGameHUD";
-        
+
         int enemyScore = GameObject.Find("Enemy").GetComponent<PointsManager>().GetScore();
         int playerScore = GameObject.Find("Player").GetComponent<PointsManager>().GetScore();
-        
+
         if (enemyScore < playerScore)
         {
             GameObject.Find("EndGameHUD").transform.FindChild("Panel/VictoryText").gameObject.SetActive(true);
@@ -63,7 +67,7 @@ public class TimerController : MonoBehaviour {
             GameObject.Find("EndGameHUD").transform.FindChild("Panel/DrawText").gameObject.SetActive(true);
         }
 
-        
+
     }
 
     public void timerOff()

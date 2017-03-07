@@ -17,8 +17,8 @@ public class GameLoader : MonoBehaviour
     private GameObject player;
     private GameObject enemy;
 
-    private Vector3 playerInitialPos = new Vector3(5f, 0.55f, -5f);
-    private Vector3 enemyInitialPos = new Vector3(-5f, 0.55f, 5f);
+    private Vector3 playerInitialPos = new Vector3(3f, 0.55f, -3f);
+    private Vector3 enemyInitialPos = new Vector3(-3f, 0.55f, 3f);
 
     public GameObject target;
 

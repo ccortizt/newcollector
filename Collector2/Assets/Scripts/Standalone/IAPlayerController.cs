@@ -4,14 +4,16 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.AI;
 
-public class IAPlayerController : MonoBehaviour {
+public class IAPlayerController : MonoBehaviour
+{
 
     private GameObject target;
     private int score = 0;
     private int playerScore = 0;
 
-	void Start () {
-        
+    void Start()
+    {
+
         GetComponent<MeshRenderer>().material.color = Color.yellow;
         gameObject.transform.FindChild("Canvas/Text").GetComponent<Text>().color = Color.black;
     }
@@ -19,15 +21,15 @@ public class IAPlayerController : MonoBehaviour {
     void Update()
     {
         transform.Rotate(new Vector3(90, 0, 0));
-        transform.position += new Vector3(0,0.4f,0);
+        transform.position += new Vector3(0, 0.4f, 0);
         try
-        {           
-            target = GameObject.Find("Apple(Clone)");
-            if(target != null)
+        {
+            target = GameObject.FindGameObjectWithTag("GoodApple");
+            if (target != null)
                 gameObject.GetComponent<NavMeshAgent>().destination = target.transform.position;
             else
             {
-                target = GameObject.Find("Apple(Clone)");
+                target = GameObject.FindGameObjectWithTag("GoodApple");
                 gameObject.GetComponent<NavMeshAgent>().destination = target.transform.position;
             }
             //PrintTarget();

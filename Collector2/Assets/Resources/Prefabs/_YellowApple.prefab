@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 11470148}
   - component: {fileID: 96354940267578128}
   m_Layer: 0
-  m_Name: Apple
-  m_TagString: Untagged
+  m_Name: _YellowApple
+  m_TagString: BadApple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 77be596e43099ba488f8ee9e4b1f6c6e, type: 2}
+  - {fileID: 2100000, guid: 4fcead78251e81d44ba124d310fd62b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,7 +135,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 77be596e43099ba488f8ee9e4b1f6c6e, type: 2}
+  - {fileID: 2100000, guid: 4fcead78251e81d44ba124d310fd62b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -187,7 +187,7 @@ TrailRenderer:
         rgba: 4294967295
       key1:
         serializedVersion: 2
-        rgba: 4279430672
+        rgba: 4283952350
       key2:
         serializedVersion: 2
         rgba: 0

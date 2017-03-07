@@ -7,10 +7,17 @@ public class PropsManager : MonoBehaviour
 {
 
     public GameObject prop;
+    public GameObject prop1;
+    public GameObject prop2;
+    public GameObject prop3;
+    public GameObject prop4;
+    public GameObject prop5;
+
     private float xPos = 4;
     private float yPos = 0.3f;
     private float zPos = 4;
     public float spawnTime = 2f;
+    public int maximumAppleInstantiated;
 
     void Start()
     {
@@ -21,18 +28,36 @@ public class PropsManager : MonoBehaviour
     {
         for (int i = 0; i < numberProps; i++)
         {
-            for (int j = 0; j < Random.Range(1, 6); j++)
+            for (int j = 0; j < Random.Range(1, maximumAppleInstantiated); j++)
             {
                 spawn();
-            }            
+            }
             yield return new WaitForSeconds(period);
         }
-            
+
     }
 
     public void spawn()
     {
-        Instantiate(prop, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+        float prob = Random.Range(0, 100);
+
+        if (prob >= 0 && prob < 40)
+            Instantiate(prop, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+
+        if (prob >= 40 && prob < 50)
+            Instantiate(prop1, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+
+        if (prob >= 50 && prob < 65)
+            Instantiate(prop2, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+
+        if (prob >= 65 && prob < 80)
+            Instantiate(prop3, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+
+        if (prob >= 80 && prob < 90)
+            Instantiate(prop4, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+
+        if (prob >= 90 && prob < 100)
+            Instantiate(prop5, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
     }
 
 }
