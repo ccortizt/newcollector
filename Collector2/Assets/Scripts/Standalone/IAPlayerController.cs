@@ -11,17 +11,30 @@ public class IAPlayerController : MonoBehaviour
     private int score = 0;
     private int playerScore = 0;
 
-    void Start()
-    {
+    public float moveSpeedPercentage = 100;
+    private float defaultMoveSpeedPercentage = 100;
+    private float effectTime = 4f;
+    private bool isUnderEffect;
 
+
+    void OnAwake()
+    {
+        moveSpeedPercentage = defaultMoveSpeedPercentage;
+        isUnderEffect = false;
+    }
+    void Start()
+    {       
+       
         GetComponent<MeshRenderer>().material.color = Color.yellow;
         gameObject.transform.FindChild("Canvas/Text").GetComponent<Text>().color = Color.black;
     }
 
     void Update()
     {
+        
         transform.Rotate(new Vector3(90, 0, 0));
         transform.position += new Vector3(0, 0.4f, 0);
+
         try
         {
             target = GameObject.FindGameObjectWithTag("GoodApple");
@@ -58,65 +71,9 @@ public class IAPlayerController : MonoBehaviour
 
         int deltaScore = score - playerScore; //+ if enemy wins ... - if player wins 
 
-        gameObject.GetComponent<NavMeshAgent>().speed = SetNewSpeed(deltaScore);
+        gameObject.GetComponent<NavMeshAgent>().speed = SetNewSpeed(deltaScore) / 100f * moveSpeedPercentage;
+        
         gameObject.GetComponent<NavMeshAgent>().acceleration = SetNewAcceleration(deltaScore);
-
-        //if ((deltaScore == 0))
-        //{
-        //    gameObject.GetComponent<NavMeshAgent>().speed = 9;
-        //    gameObject.GetComponent<NavMeshAgent>().acceleration = 13;
-        //}
-
-
-        //if ((deltaScore == 1) )
-        //{
-        //    gameObject.GetComponent<NavMeshAgent>().speed  = 8;
-        //    gameObject.GetComponent<NavMeshAgent>().acceleration = 12;
-        //}
-
-        //if ((deltaScore == 2))
-        //{
-        //    gameObject.GetComponent<NavMeshAgent>().speed = 7;
-        //    gameObject.GetComponent<NavMeshAgent>().acceleration = 11;
-        //}
-
-        //if (deltaScore == 3 )
-        //{
-        //    gameObject.GetComponent<NavMeshAgent>().speed = 6;
-        //    gameObject.GetComponent<NavMeshAgent>().acceleration = 10;
-        //}
-
-        //if ((deltaScore) > 5 )
-        //{
-        //    gameObject.GetComponent<NavMeshAgent>().speed = 5;
-        //    gameObject.GetComponent<NavMeshAgent>().acceleration = 8;
-        //}
-
-        //if ((deltaScore) < -5 )
-        //{
-        //    gameObject.GetComponent<NavMeshAgent>().speed = 13;
-        //    gameObject.GetComponent<NavMeshAgent>().acceleration = 16;
-        //}
-
-        //if ((deltaScore) == -4 )
-        //{
-        //    gameObject.GetComponent<NavMeshAgent>().speed = 12;
-        //    gameObject.GetComponent<NavMeshAgent>().acceleration = 15;
-        //}
-
-        //if ((deltaScore) == -3 )
-        //{
-        //    gameObject.GetComponent<NavMeshAgent>().speed = 11;
-        //    gameObject.GetComponent<NavMeshAgent>().acceleration = 14;
-        //}
-
-        //if ((deltaScore) == -1  )
-        //{
-        //    gameObject.GetComponent<NavMeshAgent>().speed = 10;
-        //    gameObject.GetComponent<NavMeshAgent>().acceleration = 13;
-        //}
-
-        //Debug.Log("V: " + gameObject.GetComponent<NavMeshAgent>().speed + " A: " + gameObject.GetComponent<NavMeshAgent>().acceleration);
 
     }
 
@@ -145,5 +102,27 @@ public class IAPlayerController : MonoBehaviour
             return -delta + 12;
     }
 
+    public void SetMoveSpeed(float percentage)
+    {
+        if (isUnderEffect)
+        {
+            RestoreMoveSpeed();
+        }
 
+        moveSpeedPercentage = percentage;
+        isUnderEffect = true;
+        StartCoroutine(RestoreMoveSpeedDelayed());
+    }
+
+    public IEnumerator RestoreMoveSpeedDelayed()
+    {
+        yield return new WaitForSeconds(effectTime);
+        isUnderEffect = false;
+        RestoreMoveSpeed();
+    }
+
+    private void RestoreMoveSpeed()
+    {
+        moveSpeedPercentage = defaultMoveSpeedPercentage;
+    }
 }

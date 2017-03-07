@@ -6,6 +6,10 @@ public class PlayerController : MonoBehaviour
 {
 
     public float moveSpeed;
+    private float defaultMoveSpeed;
+    private float effectTime = 4f;
+    private bool isUnderEffect;
+
     private Vector3 dir;
     private float phoneAcceleration = 4f;
     private Rigidbody rb;
@@ -15,7 +19,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();   
+        rb = GetComponent<Rigidbody>();
+        defaultMoveSpeed = moveSpeed;
+        isUnderEffect = false;
     }
 
     void Update()
@@ -114,5 +120,32 @@ public class PlayerController : MonoBehaviour
         #endif
 
     }
+
+    public void SetMoveSpeed(float percentage)
+    {
+        if (isUnderEffect)
+        {
+            RestoreMoveSpeed();
+        }
+        
+        moveSpeed = (moveSpeed / 100) * percentage;
+        isUnderEffect = true;
+        StartCoroutine(RestoreMoveSpeedDelay());
+        
+
+    }
+
+    public IEnumerator RestoreMoveSpeedDelay()
+    {
+        yield return new WaitForSeconds(effectTime);
+        isUnderEffect = false;
+        RestoreMoveSpeed();
+    }
+
+    private void RestoreMoveSpeed()
+    {
+        moveSpeed = defaultMoveSpeed;
+    }
+
 
 }

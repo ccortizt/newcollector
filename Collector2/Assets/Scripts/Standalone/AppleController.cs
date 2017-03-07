@@ -11,14 +11,53 @@ public class AppleController : MonoBehaviour
     private float minForceProportion;
 
     private int scoreToGive;
+    private bool hasSpeedEffect;
+    private float speedPercentageModifier;
 
     void Start()
     {
         AssignScore();
         AssignForce();
+        AssignEffect();
         AppleMovement();
         StartCoroutine(RandomAppleMovementCycle(GetRandom(1, 5), normalNumberMovements));
 
+    }
+
+    private void AssignEffect()
+    {
+        if (gameObject.name.Contains("Red"))
+        {
+            hasSpeedEffect = false;
+        }
+
+        if (gameObject.name.Contains("Green"))
+        {
+            hasSpeedEffect = false;
+        }
+
+        if (gameObject.name.Contains("Blue"))
+        {
+            hasSpeedEffect = true;
+            speedPercentageModifier = 0;
+        }
+
+        if (gameObject.name.Contains("Yellow"))
+        {
+            hasSpeedEffect = true;
+            speedPercentageModifier = 50;
+        }
+
+        if (gameObject.name.Contains("Purple"))
+        {
+            hasSpeedEffect = true;
+            speedPercentageModifier = 200;
+        }
+
+        if (gameObject.name.Contains("Random"))
+        {
+            hasSpeedEffect = false;
+        }
     }
 
     private void AssignForce()
@@ -135,15 +174,21 @@ public class AppleController : MonoBehaviour
 
     }
 
-    //void OnCollisionEnter(Collision coll)
-    //{
+    void OnCollisionEnter(Collision coll)
+    {
 
-    //    Debug.Log("n " + coll.gameObject.name);
-    //    if (coll.gameObject.name.Contains("Player"))
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
+        if (coll.gameObject.name.Contains("Player"))
+        {
+            if (this.hasSpeedEffect)
+                coll.gameObject.GetComponent<PlayerController>().SetMoveSpeed(speedPercentageModifier);
+        }
+
+        if (coll.gameObject.name.Contains("Enemy"))
+        {
+            if (this.hasSpeedEffect)
+                coll.gameObject.GetComponent<IAPlayerController>().SetMoveSpeed(speedPercentageModifier);
+        }
+    }
 
     public int GetScoreToAdd()
     {
