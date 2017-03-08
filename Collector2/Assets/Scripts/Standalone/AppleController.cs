@@ -51,7 +51,7 @@ public class AppleController : MonoBehaviour
         if (gameObject.name.Contains("Purple"))
         {
             hasSpeedEffect = true;
-            speedPercentageModifier = 200;
+            speedPercentageModifier = 300;
         }
 
         if (gameObject.name.Contains("Random"))

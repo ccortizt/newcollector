@@ -8,26 +8,25 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private float defaultMoveSpeed;
     private float effectTime = 4f;
-    private bool isUnderEffect;
+    
 
     private Vector3 dir;
     private float phoneAcceleration = 4f;
     private Rigidbody rb;
 
     private float sensibility = 0.15f;
-   
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         defaultMoveSpeed = moveSpeed;
-        isUnderEffect = false;
     }
 
     void Update()
     {
 
-        #if UNITY_ANDROID
+#if UNITY_ANDROID
         float Horizontal = Input.acceleration.x;
         float Vertical = Input.acceleration.y;
         
@@ -88,57 +87,50 @@ public class PlayerController : MonoBehaviour
 #else
 
         if (Input.GetAxisRaw("Horizontal") > 0.5f)
-            {
-         
-                rb.MovePosition(transform.position + transform.right * Time.deltaTime * moveSpeed);
-                //transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+        {
 
-            }
+            rb.MovePosition(transform.position + transform.right * Time.deltaTime * moveSpeed);
+            //transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
 
-            if (Input.GetAxisRaw("Horizontal") < -0.5f)
-            {
-                     
-                rb.MovePosition(transform.position - transform.right * Time.deltaTime * moveSpeed);
-                //transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
-            }
+        }
 
-            if (Input.GetAxisRaw("Vertical") > 0.5f)
-            {
-                        
-                rb.MovePosition(transform.position + transform.up * Time.deltaTime * moveSpeed);
-                //transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        if (Input.GetAxisRaw("Horizontal") < -0.5f)
+        {
 
-            }
+            rb.MovePosition(transform.position - transform.right * Time.deltaTime * moveSpeed);
+            //transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
+        }
 
-            if (Input.GetAxisRaw("Vertical") < -0.5f)
-            {
+        if (Input.GetAxisRaw("Vertical") > 0.5f)
+        {
 
-                rb.MovePosition(transform.position - transform.up * Time.deltaTime * moveSpeed);
-                //transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
-            }
+            rb.MovePosition(transform.position + transform.up * Time.deltaTime * moveSpeed);
+            //transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 
-        #endif
+        }
+
+        if (Input.GetAxisRaw("Vertical") < -0.5f)
+        {
+
+            rb.MovePosition(transform.position - transform.up * Time.deltaTime * moveSpeed);
+            //transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+        }
+
+#endif
 
     }
 
     public void SetMoveSpeed(float percentage)
     {
-        if (isUnderEffect)
-        {
-            RestoreMoveSpeed();
-        }
-        
-        moveSpeed = (moveSpeed / 100) * percentage;
-        isUnderEffect = true;
-        StartCoroutine(RestoreMoveSpeedDelay());
-        
+        moveSpeed = (defaultMoveSpeed / 100) * percentage;
 
+        StartCoroutine(RestoreMoveSpeedDelay());
     }
 
     public IEnumerator RestoreMoveSpeedDelay()
     {
         yield return new WaitForSeconds(effectTime);
-        isUnderEffect = false;
+
         RestoreMoveSpeed();
     }
 

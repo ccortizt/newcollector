@@ -14,24 +14,23 @@ public class IAPlayerController : MonoBehaviour
     public float moveSpeedPercentage = 100;
     private float defaultMoveSpeedPercentage = 100;
     private float effectTime = 4f;
-    private bool isUnderEffect;
+    
 
 
     void OnAwake()
     {
         moveSpeedPercentage = defaultMoveSpeedPercentage;
-        isUnderEffect = false;
     }
     void Start()
-    {       
-       
+    {
+
         GetComponent<MeshRenderer>().material.color = Color.yellow;
         gameObject.transform.FindChild("Canvas/Text").GetComponent<Text>().color = Color.black;
     }
 
     void Update()
     {
-        
+
         transform.Rotate(new Vector3(90, 0, 0));
         transform.position += new Vector3(0, 0.4f, 0);
 
@@ -42,7 +41,7 @@ public class IAPlayerController : MonoBehaviour
                 gameObject.GetComponent<NavMeshAgent>().destination = target.transform.position;
             else
             {
-                target = GameObject.FindGameObjectWithTag("GoodApple");
+                target = GameObject.FindGameObjectWithTag("BadApple");
                 gameObject.GetComponent<NavMeshAgent>().destination = target.transform.position;
             }
             //PrintTarget();
@@ -72,7 +71,7 @@ public class IAPlayerController : MonoBehaviour
         int deltaScore = score - playerScore; //+ if enemy wins ... - if player wins 
 
         gameObject.GetComponent<NavMeshAgent>().speed = SetNewSpeed(deltaScore) / 100f * moveSpeedPercentage;
-        
+
         gameObject.GetComponent<NavMeshAgent>().acceleration = SetNewAcceleration(deltaScore);
 
     }
@@ -104,20 +103,15 @@ public class IAPlayerController : MonoBehaviour
 
     public void SetMoveSpeed(float percentage)
     {
-        if (isUnderEffect)
-        {
-            RestoreMoveSpeed();
-        }
-
         moveSpeedPercentage = percentage;
-        isUnderEffect = true;
+
         StartCoroutine(RestoreMoveSpeedDelayed());
     }
 
     public IEnumerator RestoreMoveSpeedDelayed()
     {
         yield return new WaitForSeconds(effectTime);
-        isUnderEffect = false;
+
         RestoreMoveSpeed();
     }
 
