@@ -23,8 +23,8 @@ public class IAPlayerController : MonoBehaviour
     }
     void Start()
     {
-
-        GetComponent<MeshRenderer>().material.color = Color.yellow;
+        gameObject.transform.FindChild("Rabbit_Yellow").gameObject.SetActive(true);
+        gameObject.transform.FindChild("Rabbit_Red").gameObject.SetActive(false);
         gameObject.transform.FindChild("Canvas/Text").GetComponent<Text>().color = Color.black;
     }
 
