@@ -45,7 +45,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1052809141637414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,7 +1213,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1078870481257448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.588}
+  m_LocalPosition: {x: 0, y: 0, z: 0.421}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 4821456300791190}
@@ -1664,7 +1664,7 @@ Animator:
   m_GameObject: {fileID: 1352743760124854}
   m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 05b0336cad2ece64b99ce054ed619f4c, type: 3}
-  m_Controller: {fileID: 9100000, guid: 54aae2d8cf7199a4db1b9cc66bcab81b, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -4673,7 +4673,7 @@ ParticleSystem:
       maxColor: {r: 0.9647059, g: 0.02745098, b: 0.9764706, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 0.2
+      scalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4691,7 +4691,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0
+          value: 0.3333333
           inSlope: 0
           outSlope: 0
           tangentMode: 0

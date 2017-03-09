@@ -73,7 +73,15 @@ public class PointsManager : MonoBehaviour
     public void scorePlus(int scoreToAdd)
     {
         score += scoreToAdd;
-        gameObject.transform.FindChild("Canvas").transform.FindChild("Text").GetComponent<Text>().text = "" + score;
+
+        if (gameObject.name.Equals("Player"))
+        {
+            GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "" + score;
+        }
+        if (gameObject.name.Equals("Enemy"))
+        {
+            GameObject.FindGameObjectWithTag("EnemyScore").GetComponent<Text>().text = "" + score;
+        }
 
     }
 

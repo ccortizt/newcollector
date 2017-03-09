@@ -7,6 +7,8 @@ TagManager:
   - Fire
   - GoodApple
   - BadApple
+  - PlayerScore
+  - EnemyScore
   layers:
   - Default
   - TransparentFX

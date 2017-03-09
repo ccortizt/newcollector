@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class TimerController : MonoBehaviour
 {
 
+    public Text timerCountText;
     public float timeLeft;
     private bool timerOn;
 
@@ -25,12 +26,11 @@ public class TimerController : MonoBehaviour
             timeLeft -= Time.deltaTime;
             if (timeLeft >= 0)
             {
-                gameObject.transform.FindChild("Panel/TimerCount").GetComponent<Text>().text =
-                    Mathf.Round(timeLeft).ToString();
+                timerCountText.text = Mathf.Round(timeLeft).ToString();
             }
             if (timeLeft <= 0)
             {
-                gameObject.transform.FindChild("Panel/TimerCount").GetComponent<Text>().text = "0";
+                timerCountText.text = "0";
                 timerOff();
                 GameObject.Find("Enemy").GetComponent<IAPlayerController>().enabled = false;
                 GameObject.Find("Enemy").GetComponent<NavMeshAgent>().enabled = false;
