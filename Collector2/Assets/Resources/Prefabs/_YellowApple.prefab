@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2355332}
   - component: {fileID: 5452502}
   - component: {fileID: 11470148}
+  - component: {fileID: 114831451490395816}
   - component: {fileID: 96354940267578128}
   m_Layer: 0
   m_Name: _YellowApple
@@ -95,7 +96,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150588}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c3f63ba2436a084ebfbfabdad953b8c, type: 3}
   m_Name: 
@@ -303,6 +304,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114831451490395816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c24e528c08b75f4d89bbdf9f1862d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!198 &198234526193420062

@@ -9,6 +9,8 @@ TagManager:
   - BadApple
   - PlayerScore
   - EnemyScore
+  - EnemyItem
+  - PlayerItem
   layers:
   - Default
   - TransparentFX

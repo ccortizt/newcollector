@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\MenuScripts\GameLoader.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\InHUDController.cs" />
+     <Compile Include="Assets\Scripts\Standalone\AppleCollisionController.cs" />
      <Compile Include="Assets\Scripts\Standalone\AppleController.cs" />
      <Compile Include="Assets\Scripts\Standalone\IAPlayerController.cs" />
      <Compile Include="Assets\Scripts\Standalone\PlayerController.cs" />

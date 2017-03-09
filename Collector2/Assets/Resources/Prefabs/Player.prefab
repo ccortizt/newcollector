@@ -1618,7 +1618,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1239994718129752}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 80
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -1777,6 +1777,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  ice: {fileID: 21300000, guid: 8a587d5f0ff2b2346b34fbe5f0220c5e, type: 3}
+  slow: {fileID: 21300000, guid: ed820491bf61b9f44aca3cc352626fab, type: 3}
+  speed: {fileID: 21300000, guid: 2fc7f901a32603c44b09ca5e326b814f, type: 3}
+  none: {fileID: 21300000, guid: a1caaf546f8fc05498018c9a5bba23e1, type: 3}
+  iceProp: {fileID: 150588, guid: 8600501844d43ec41972483fc7bf4862, type: 2}
+  slowProp: {fileID: 150588, guid: be6544bf80068dd4295a9a853e841610, type: 2}
+  speedProp: {fileID: 150588, guid: 921ece55769c82e41b069b265a74a955, type: 2}
 --- !u!137 &137227386846579916
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -42,22 +42,47 @@ public class PropsManager : MonoBehaviour
         float prob = Random.Range(0, 100);
 
         if (prob >= 0 && prob < 40)
-            Instantiate(prop, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+        {
+            GameObject apple = Instantiate(prop, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+            apple.GetComponent<AppleController>().enabled = true;
+        }
+
 
         if (prob >= 40 && prob < 50)
-            Instantiate(prop1, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+        {
+            GameObject apple = Instantiate(prop1, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+            apple.GetComponent<AppleController>().enabled = true;
+            
+        }
+
 
         if (prob >= 50 && prob < 65)
-            Instantiate(prop2, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+        {
+            GameObject apple = Instantiate(prop2, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+            apple.GetComponent<AppleController>().enabled = true;
+        }
+         
 
         if (prob >= 65 && prob < 80)
-            Instantiate(prop3, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+        {
+            GameObject apple = Instantiate(prop3, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+            apple.GetComponent<AppleController>().enabled = true;
+        }
+         
 
         if (prob >= 80 && prob < 90)
-            Instantiate(prop4, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+        {
+            GameObject apple = Instantiate(prop4, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+            apple.GetComponent<AppleController>().enabled = true;
+        }
+
 
         if (prob >= 90 && prob < 100)
-            Instantiate(prop5, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+        {
+            GameObject apple = Instantiate(prop5, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
+            apple.GetComponent<AppleController>().enabled = true;    
+        }
+        
     }
 
 }

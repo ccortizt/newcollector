@@ -10,55 +10,57 @@ public class AppleController : MonoBehaviour
     private float maxForceProportion;
     private float minForceProportion;
 
-    private int scoreToGive;
-    private bool hasSpeedEffect;
-    private float speedPercentageModifier;
+    //private int scoreToGive;
+    //private bool hasSpeedEffect;
+    //private float speedPercentageModifier;
+
+    private bool randomMoveEnabled = true;
 
     void Start()
     {
-        AssignScore();
+        //AssignScore();
         AssignForce();
-        AssignEffect();
+        //AssignEffect();
         AppleMovement();
         StartCoroutine(RandomAppleMovementCycle(GetRandom(1, 5), normalNumberMovements));
 
     }
 
-    private void AssignEffect()
-    {
-        if (gameObject.name.Contains("Red"))
-        {
-            hasSpeedEffect = false;
-        }
+    //private void AssignEffect()
+    //{
+    //    if (gameObject.name.Contains("Red"))
+    //    {
+    //        hasSpeedEffect = false;
+    //    }
 
-        if (gameObject.name.Contains("Green"))
-        {
-            hasSpeedEffect = false;
-        }
+    //    if (gameObject.name.Contains("Green"))
+    //    {
+    //        hasSpeedEffect = false;
+    //    }
 
-        if (gameObject.name.Contains("Blue"))
-        {
-            hasSpeedEffect = true;
-            speedPercentageModifier = 0;
-        }
+    //    if (gameObject.name.Contains("Blue"))
+    //    {
+    //        hasSpeedEffect = true;
+    //        speedPercentageModifier = 0;
+    //    }
 
-        if (gameObject.name.Contains("Yellow"))
-        {
-            hasSpeedEffect = true;
-            speedPercentageModifier = 50;
-        }
+    //    if (gameObject.name.Contains("Yellow"))
+    //    {
+    //        hasSpeedEffect = true;
+    //        speedPercentageModifier = 50;
+    //    }
 
-        if (gameObject.name.Contains("Purple"))
-        {
-            hasSpeedEffect = true;
-            speedPercentageModifier = 300;
-        }
+    //    if (gameObject.name.Contains("Purple"))
+    //    {
+    //        hasSpeedEffect = true;
+    //        speedPercentageModifier = 300;
+    //    }
 
-        if (gameObject.name.Contains("Random"))
-        {
-            hasSpeedEffect = false;
-        }
-    }
+    //    if (gameObject.name.Contains("Random"))
+    //    {
+    //        hasSpeedEffect = false;
+    //    }
+    //}
 
     private void AssignForce()
     {
@@ -99,38 +101,38 @@ public class AppleController : MonoBehaviour
         }
     }
 
-    private void AssignScore()
-    {
-        if (gameObject.name.Contains("Red"))
-        {
-            scoreToGive = 1;
-        }
+    //private void AssignScore()
+    //{
+    //    if (gameObject.name.Contains("Red"))
+    //    {
+    //        scoreToGive = 1;
+    //    }
 
-        if (gameObject.name.Contains("Green"))
-        {
-            scoreToGive = 3;
-        }
+    //    if (gameObject.name.Contains("Green"))
+    //    {
+    //        scoreToGive = 3;
+    //    }
 
-        if (gameObject.name.Contains("Blue"))
-        {
-            scoreToGive = 2;
-        }
+    //    if (gameObject.name.Contains("Blue"))
+    //    {
+    //        scoreToGive = 2;
+    //    }
 
-        if (gameObject.name.Contains("Yellow"))
-        {
-            scoreToGive = 2;
-        }
+    //    if (gameObject.name.Contains("Yellow"))
+    //    {
+    //        scoreToGive = 2;
+    //    }
 
-        if (gameObject.name.Contains("Purple"))
-        {
-            scoreToGive = 2;
-        }
+    //    if (gameObject.name.Contains("Purple"))
+    //    {
+    //        scoreToGive = 2;
+    //    }
 
-        if (gameObject.name.Contains("Random"))
-        {
-            scoreToGive = 5;
-        }
-    }
+    //    if (gameObject.name.Contains("Random"))
+    //    {
+    //        scoreToGive = 5;
+    //    }
+    //}
 
     private void AppleMovement()
     {
@@ -166,33 +168,41 @@ public class AppleController : MonoBehaviour
 
     private IEnumerator RandomAppleMovementCycle(float period, int numberTimes)
     {
+        
         for (int i = 0; i < numberTimes; i++)
         {
-            AppleMovement();
+
             yield return new WaitForSeconds(period);
+            if (randomMoveEnabled)
+                AppleMovement();
         }
 
     }
 
-    void OnCollisionEnter(Collision coll)
+    //void OnCollisionEnter(Collision coll)
+    //{
+
+    //    if (coll.gameObject.name.Contains("Player"))
+    //    {
+    //        if (this.hasSpeedEffect)
+    //            coll.gameObject.GetComponent<PlayerController>().SetMoveSpeed(speedPercentageModifier);
+    //    }
+
+    //    if (coll.gameObject.name.Contains("Enemy"))
+    //    {
+    //        if (this.hasSpeedEffect)
+    //            coll.gameObject.GetComponent<IAPlayerController>().SetMoveSpeed(speedPercentageModifier);
+    //    }
+    //}
+
+    //public int GetScoreToAdd()
+    //{
+    //    return scoreToGive;
+    //}
+
+    public void SetMovementDisabled()
     {
-
-        if (coll.gameObject.name.Contains("Player"))
-        {
-            if (this.hasSpeedEffect)
-                coll.gameObject.GetComponent<PlayerController>().SetMoveSpeed(speedPercentageModifier);
-        }
-
-        if (coll.gameObject.name.Contains("Enemy"))
-        {
-            if (this.hasSpeedEffect)
-                coll.gameObject.GetComponent<IAPlayerController>().SetMoveSpeed(speedPercentageModifier);
-        }
-    }
-
-    public int GetScoreToAdd()
-    {
-        return scoreToGive;
+        randomMoveEnabled = false;
     }
 }
 

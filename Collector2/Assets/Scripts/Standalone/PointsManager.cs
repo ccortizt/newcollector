@@ -25,7 +25,7 @@ public class PointsManager : MonoBehaviour
 
             if (canAddScore)
             {
-                scorePlus(coll.gameObject.GetComponent<AppleController>().GetScoreToAdd());
+                scorePlus(coll.gameObject.GetComponent<AppleCollisionController>().GetScoreToAdd());
 
                 if (gameObject.name.Contains("Player"))
                     exp = (GameObject)Instantiate(Resources.Load("Prefabs/VfxExplosionPlayer"), transform.position, Quaternion.identity);
@@ -60,6 +60,23 @@ public class PointsManager : MonoBehaviour
 
                 if (coll.gameObject.name.Contains("Random"))
                 {
+                    if (GetComponent<PlayerController>().GetPowerAcquired().Equals("none"))
+                    {
+                        int aux = Random.Range(0, 3);
+                        if (aux == 1)
+                        {
+                            GetComponent<PlayerController>().SetPowerAcquired("ice");
+                        }
+
+                        if (aux == 2)
+                        {
+                            GetComponent<PlayerController>().SetPowerAcquired("speed");
+                        }
+                        if (aux == 0)
+                        {
+                            GetComponent<PlayerController>().SetPowerAcquired("slow");
+                        }
+                    }
                     //gameObject.transform.FindChild("Canvas").transform.FindChild("Text").GetComponent<Text>().text = "" + score;
                 }
             }

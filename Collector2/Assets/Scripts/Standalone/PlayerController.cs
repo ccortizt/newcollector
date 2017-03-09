@@ -8,6 +8,15 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private float defaultMoveSpeed;
     private float effectTime = 4f;
+
+    public Sprite ice;
+    public Sprite slow;
+    public Sprite speed;
+    public Sprite none;
+
+    public GameObject iceProp;
+    public GameObject slowProp;
+    public GameObject speedProp;
     
 
     private Vector3 dir;
@@ -15,6 +24,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
 
     private float sensibility = 0.15f;
+
+    private string powerAcquired = "none";
 
 
     void Start()
@@ -85,35 +96,151 @@ public class PlayerController : MonoBehaviour
         //}
 
 #else
-
-        if (Input.GetAxisRaw("Horizontal") > 0.5f)
+        if (!Input.GetKey(KeyCode.Space))
         {
+            if (Input.GetAxisRaw("Horizontal") > 0.5f)
+            {
 
-            rb.MovePosition(transform.position + transform.right * Time.deltaTime * moveSpeed);
-            //transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+                rb.MovePosition(transform.position + transform.right * Time.deltaTime * moveSpeed);
+                //transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
 
+            }
+
+            if (Input.GetAxisRaw("Horizontal") < -0.5f)
+            {
+
+                rb.MovePosition(transform.position - transform.right * Time.deltaTime * moveSpeed);
+                //transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
+            }
+
+            if (Input.GetAxisRaw("Vertical") > 0.5f)
+            {
+
+                rb.MovePosition(transform.position + transform.up * Time.deltaTime * moveSpeed);
+                //transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+
+            }
+
+            if (Input.GetAxisRaw("Vertical") < -0.5f)
+            {
+
+                rb.MovePosition(transform.position - transform.up * Time.deltaTime * moveSpeed);
+                //transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+            }
         }
+        
 
-        if (Input.GetAxisRaw("Horizontal") < -0.5f)
-        {
+        if (Input.GetKey(KeyCode.Space))
+        {            
 
-            rb.MovePosition(transform.position - transform.right * Time.deltaTime * moveSpeed);
-            //transform.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
-        }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                var prop = iceProp;
 
-        if (Input.GetAxisRaw("Vertical") > 0.5f)
-        {
+                if (powerAcquired.Equals("ice"))
+                {
+                    prop = Instantiate(iceProp, transform.position - transform.up, Quaternion.identity);
+                }
 
-            rb.MovePosition(transform.position + transform.up * Time.deltaTime * moveSpeed);
-            //transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                if (powerAcquired.Equals("slow"))
+                {
+                    prop = Instantiate(slowProp, transform.position - transform.up, Quaternion.identity);
+                }
 
-        }
+                if (powerAcquired.Equals("speed"))
+                {
+                    prop = Instantiate(speedProp, transform.position - transform.up, Quaternion.identity);
+                }
 
-        if (Input.GetAxisRaw("Vertical") < -0.5f)
-        {
 
-            rb.MovePosition(transform.position - transform.up * Time.deltaTime * moveSpeed);
-            //transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+                
+                SetPowerAcquired("none");
+
+                
+                prop.GetComponent<AppleController>().SetMovementDisabled();
+                prop.GetComponent<Rigidbody>().velocity = -prop.transform.right * 20;
+
+            }
+
+
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                var prop = iceProp;
+
+                if (powerAcquired.Equals("ice"))
+                {
+                    prop = Instantiate(iceProp, transform.position + transform.up, Quaternion.identity);
+                }
+
+                if (powerAcquired.Equals("slow"))
+                {
+                    prop = Instantiate(slowProp, transform.position + transform.up, Quaternion.identity);
+                }
+
+                if (powerAcquired.Equals("speed"))
+                {
+                    prop = Instantiate(speedProp, transform.position + transform.up, Quaternion.identity);
+                }
+
+                SetPowerAcquired("none");
+                
+                prop.GetComponent<AppleController>().SetMovementDisabled();
+                prop.GetComponent<Rigidbody>().velocity = prop.transform.right * 20;
+
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                var prop = iceProp;
+
+                if (powerAcquired.Equals("ice"))
+                {
+                    prop = Instantiate(iceProp, transform.position - transform.right, Quaternion.identity);
+                    
+                }
+
+                if (powerAcquired.Equals("slow"))
+                {
+                    prop = Instantiate(slowProp, transform.position - transform.right, Quaternion.identity);
+                }
+
+                if (powerAcquired.Equals("speed"))
+                {
+                    prop = Instantiate(speedProp, transform.position - transform.right, Quaternion.identity);
+                }
+
+                SetPowerAcquired("none");
+                
+                prop.GetComponent<AppleController>().SetMovementDisabled();
+                prop.GetComponent<Rigidbody>().velocity = prop.transform.forward * 20;
+
+            }
+
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                var prop = iceProp;
+
+                if (powerAcquired.Equals("ice"))
+                {
+                    prop = Instantiate(iceProp, transform.position + transform.right, Quaternion.identity);
+                }
+
+                if (powerAcquired.Equals("slow"))
+                {
+                    prop = Instantiate(slowProp, transform.position + transform.right, Quaternion.identity);
+                }
+
+                if (powerAcquired.Equals("speed"))
+                {
+                    prop = Instantiate(speedProp, transform.position + transform.right, Quaternion.identity);
+                }
+                
+                SetPowerAcquired("none");
+                
+                prop.GetComponent<AppleController>().SetMovementDisabled();
+                prop.GetComponent<Rigidbody>().velocity = -prop.transform.forward * 20;
+
+            }
         }
 
 #endif
@@ -139,5 +266,43 @@ public class PlayerController : MonoBehaviour
         moveSpeed = defaultMoveSpeed;
     }
 
+    public void SetPowerAcquired(string newPower)
+    {
+        powerAcquired = newPower;
+        string tag = "";
 
+        if (gameObject.name.Equals("Player"))
+        {
+            tag = "PlayerItem";
+        }
+        else
+        {
+            tag = "EnemyItem";
+        }
+
+        if (powerAcquired.Equals("ice"))
+        {
+            GameObject.FindGameObjectWithTag(tag).GetComponent<Image>().sprite = ice;
+        }
+
+        if (powerAcquired.Equals("speed"))
+        {
+            GameObject.FindGameObjectWithTag(tag).GetComponent<Image>().sprite = speed;
+        }
+
+        if (powerAcquired.Equals("slow"))
+        {
+            GameObject.FindGameObjectWithTag(tag).GetComponent<Image>().sprite = slow;
+        }
+
+        if (powerAcquired.Equals("none"))
+        {
+            GameObject.FindGameObjectWithTag(tag).GetComponent<Image>().sprite = none;
+        }
+    }
+
+    public string GetPowerAcquired()
+    {
+        return powerAcquired;
+    }
 }
