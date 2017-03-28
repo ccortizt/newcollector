@@ -20,32 +20,39 @@ public class PlayerController : MonoBehaviour
     
 
     private Vector3 dir;
-    private float phoneAcceleration = 4f;
+    private float phoneAcceleration = 1f;
     private Rigidbody rb;
 
     private float sensibility = 0.15f;
 
     private string powerAcquired = "none";
 
+    public VirtualJoystick moveJoystick;
+
 
     void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         defaultMoveSpeed = moveSpeed;
+        #if UNITY_ANDROID
+            moveJoystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<VirtualJoystick>();
+        #endif
+
     }
 
     void Update()
     {
 
 #if UNITY_ANDROID
-        float Horizontal = Input.acceleration.x;
-        float Vertical = Input.acceleration.y;
-        
-        //GameObject.Find("InGameHUD").transform.FindChild("Panel/Text").GetComponent<Text>().text =  ""+transform.position;
-        //GameObject.Find("InGameHUD").transform.FindChild("Panel/Text").GetComponent<Text>().text =  Vertical+" "+Horizontal;
+        //float Horizontal = Input.acceleration.x;
+        //float Vertical = Input.acceleration.y;
 
-        if (Horizontal < -sensibility || Horizontal > sensibility || Vertical < -sensibility || Vertical > sensibility)
-        {
+        float Horizontal = moveJoystick.InputDirection.x;
+        float Vertical = moveJoystick.InputDirection.z;
+
+        //if (Horizontal < -sensibility || Horizontal > sensibility || Vertical < -sensibility || Vertical > sensibility)
+        //{
             //anim.SetBool("isMoving", true);
             
             Vector3 movement = new Vector3(Vertical, 0, -Horizontal);
@@ -89,13 +96,16 @@ public class PlayerController : MonoBehaviour
         //        }
         //    }
 
-        }
+        //}
         //else
         //{
         //    rb.velocity = new Vector3(0f, 0f, 0f);
         //}
 
 #else
+
+        
+
         if (!Input.GetKey(KeyCode.Space))
         {
             if (Input.GetAxisRaw("Horizontal") > 0.5f)

@@ -1787,6 +1787,7 @@ MonoBehaviour:
   iceProp: {fileID: 150588, guid: 8600501844d43ec41972483fc7bf4862, type: 2}
   slowProp: {fileID: 150588, guid: be6544bf80068dd4295a9a853e841610, type: 2}
   speedProp: {fileID: 150588, guid: 921ece55769c82e41b069b265a74a955, type: 2}
+  moveJoystick: {fileID: 0}
 --- !u!137 &137227386846579916
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
