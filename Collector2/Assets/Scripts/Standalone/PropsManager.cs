@@ -21,7 +21,7 @@ public class PropsManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnProps(spawnTime, 20));
+        StartCoroutine(SpawnProps(spawnTime, 40));
     }
 
     private IEnumerator SpawnProps(float period, int numberProps)
@@ -70,14 +70,14 @@ public class PropsManager : MonoBehaviour
         }
          
 
-        if (prob >= 80 && prob < 90)
+        if (prob >= 80 && prob < 88)
         {
             GameObject apple = Instantiate(prop4, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
             apple.GetComponent<AppleController>().enabled = true;
         }
 
 
-        if (prob >= 90 && prob < 100)
+        if (prob >= 88 && prob < 100)
         {
             GameObject apple = Instantiate(prop5, new Vector3(Random.Range(-xPos, xPos), yPos, Random.Range(-zPos, zPos)), Quaternion.identity);
             apple.GetComponent<AppleController>().enabled = true;    

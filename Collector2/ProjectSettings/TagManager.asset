@@ -12,6 +12,7 @@ TagManager:
   - EnemyItem
   - PlayerItem
   - Joystick
+  - ShootButton
   layers:
   - Default
   - TransparentFX

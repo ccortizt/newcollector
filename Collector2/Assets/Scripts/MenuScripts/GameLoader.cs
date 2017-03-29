@@ -10,6 +10,7 @@ public class GameLoader : MonoBehaviour
     GameObject hud;
     GameObject board;
     GameObject inGameHUD;
+    GameObject gamePad;
 
     private Button playButton;
     private Button quitButton;
@@ -42,6 +43,9 @@ public class GameLoader : MonoBehaviour
 
         inGameHUD = (GameObject)Instantiate(Resources.Load("Prefabs/BoardHUD"), Vector3.zero, Quaternion.identity);
         inGameHUD.name = "InGameHUD";
+
+        gamePad = (GameObject)Instantiate(Resources.Load("Prefabs/GamePad"), Vector3.zero, Quaternion.identity);
+        gamePad.name = "GamePad";
     }
 
 

@@ -14,7 +14,7 @@ public class TimerController : MonoBehaviour
     void Start()
     {
         Debug.Log("STARTING GAME");
-        timeLeft = 60f;
+        timeLeft = 120f;
         timerOn = true;
     }
 
