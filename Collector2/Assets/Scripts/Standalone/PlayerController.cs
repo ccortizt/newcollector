@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
         rb = GetComponent<Rigidbody>();
         defaultMoveSpeed = moveSpeed;
 #if UNITY_ANDROID

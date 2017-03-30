@@ -46,6 +46,10 @@ public class GameLoader : MonoBehaviour
 
         gamePad = (GameObject)Instantiate(Resources.Load("Prefabs/GamePad"), Vector3.zero, Quaternion.identity);
         gamePad.name = "GamePad";
+#if !UNITY_ANDROID
+        gamePad.SetActive(false);            
+#endif
+
     }
 
 
